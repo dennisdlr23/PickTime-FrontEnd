@@ -1,0 +1,59 @@
+<div class="grid">
+    <div class="col-12 xl:col-12">
+      <div class="card">
+        <ng-template [ngIf]="loading" [ngIfElse]="showTable">
+          <skeleton-table-component [title]="title"></skeleton-table-component>
+        </ng-template>
+
+        <ng-template #showTable>
+          <p-table #dt [value]="pedidosDetalleModel" [paginator]="true" [rows]="4"
+                   responsiveLayout="scroll" styleClass="p-datatable-sm p-datatable-gridlines"
+                   [globalFilterFields]="['fecha','pedido', 'nombre_Cliente','nombre_Vendedor','nombreProducto','totalLinea', 'cantidadLineas', 'tiempoPreparacion']">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th pSortableColumn="fecha">Fecha <p-sortIcon field="fecha"></p-sortIcon> </th>
+                    <th pSortableColumn="pedido"># de Pedido<p-sortIcon field="pedido"></p-sortIcon></th>
+                    <th pSortableColumn="nombre_Cliente">Cliente<p-sortIcon field="nombre_Cliente"></p-sortIcon></th>
+                    <th pSortableColumn="nombre_Vendedor">Asesor<p-sortIcon field="nombre_Vendedor"></p-sortIcon></th>
+                    <th pSortableColumn="nombreProducto">Descripción<p-sortIcon field="nombreProducto"></p-sortIcon> </th>
+                    <th pSortableColumn="cantidadPedido">Cantidad<p-sortIcon field="cantidadPedido"></p-sortIcon> </th>
+                    <th pSortableColumn="unidadMedida">UXC<p-sortIcon field="unidadMedida"></p-sortIcon></th>
+                    <th pSortableColumn="totalLinea">Total Monetario<p-sortIcon field="totalLinea"></p-sortIcon></th>
+                    <th pSortableColumn="responsable">Responsable<p-sortIcon field="responsable"></p-sortIcon> </th>
+                    <th pSortableColumn="tiempoPreparacion">Tiempo de Preparación Estimado<p-sortIcon field="tiempoPreparacion"></p-sortIcon></th>
+                    <th pSortableColumn="sams">Sams<p-sortIcon field="sams"></p-sortIcon></th>
+
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="caption">
+              <h4 class="mt-2">{{title}}</h4>
+              <div class="flex flex-wrap gap-2 justify-content-between">
+                <div class="flex flex-wrap gap-2 align-items-center">
+                  <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                           placeholder="Buscar una palabra"/>
+                  </span>
+                </div>
+              </div>
+            </ng-template>
+            <ng-template pTemplate="body" let-detalle>
+              <tr>
+                <td style="width: 14.28%; min-width: 7rem;">{{detalle.fecha | date: 'dd/MM/yyyy' }}</td>
+                <td style="width: 14.28%; min-width: 7rem;">{{detalle.pedido }}</td>
+                <td style="width: 14.28%; min-width: 7rem;">{{detalle.nombre_Cliente}}</td>
+                <td style="width: 14.28%; min-width: 7rem;">{{detalle.nombre_Vendedor}}</td>
+                <td style="width: 14.28%; min-width: 2rem;">{{detalle.nombreProducto}}</td>
+                <td style="width: 14.28%; min-width: 7rem;">{{detalle.cantidadPedido}}</td>
+                <td style="width: 14.28%; min-width: 7rem;">{{detalle.uxc}}</td>
+                <td style="width: 14.28%; min-width: 2rem;">{{detalle.totalLinea  | currency:'L. ':'symbol':'1.2-2'}}</td>
+                <td style="width: 14.28%; min-width: 7rem;">{{detalle.responsable}}</td>
+                <td style="width: 14.28%; min-width: 2rem;">{{detalle.tiempoPreparacion}} min.</td>
+                <td style="width: 14.28%; min-width: 7rem;">{{ detalle.sams }}</td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </ng-template>
+      </div>
+    </div>
+  </div>

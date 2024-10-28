@@ -19,7 +19,7 @@
 							<ng-template pTemplate="caption">
                                 <h4 class="mt-2">{{title}}</h4>
 								<div class="flex">
-									<button pButton class="ml-2" pRipple type="button" (click)="addRole()" pTooltip="Agregar nuevo rol" tooltipPosition="bottom" label="Agregar" ></button>
+									<button pButton class="ml-2 p-button-raised p-button-danger" pRipple type="button" (click)="addRole()" pTooltip="Agregar nuevo rol" tooltipPosition="bottom" label="Agregar" ></button>
 									<span class="p-input-icon-left ml-auto">
 										<i class="pi pi-search"></i>
 										<input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Buscar una palabra" />
@@ -39,7 +39,7 @@
 									</ng-template>
 								</td>
 								<td style="width: 20%;">
-									<button (click)="editRole(role)" pButton pRipple type="button" icon="pi pi-pencil" class="p-button p-component p-button-text p-button-icon-only"></button>
+									<button (click)="editRole(role)" pButton pRipple type="button" icon="pi pi-pencil" class="p-button-rounded p-button-danger p-button-outlined"></button>
 								</td>
 							</tr>
 						</ng-template>

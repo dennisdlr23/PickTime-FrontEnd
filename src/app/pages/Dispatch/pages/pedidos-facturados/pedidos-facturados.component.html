@@ -1,0 +1,62 @@
+<div class="grid">
+    <div class="col-12 xl:col-12">
+      <div class="card">
+        <ng-template [ngIf]="loading" [ngIfElse]="showTable">
+          <skeleton-table-component [title]="title"></skeleton-table-component>
+        </ng-template>
+
+        <ng-template #showTable>
+          <p-table #dt [value]="pedidosFacturadosModel" [paginator]="true" [rows]="10"
+                   responsiveLayout="scroll" styleClass="p-datatable-sm p-datatable-gridlines"
+                   [globalFilterFields]="['id','fecha','pedido', 'nombre_Vendedor', 'nombreCiudad', 'totalLinea', 'cantidadLineas', 'tiempoPreparacion']">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th pSortableColumn="id">Id <p-sortIcon field="id"></p-sortIcon> <p-columnFilter type="text" field="id" display="menu" class="ml-auto"></p-columnFilter></th>
+                    <th pSortableColumn="fecha">Fecha <p-sortIcon field="fecha"></p-sortIcon> <p-columnFilter type="text" field="fecha" display="menu" class="ml-auto"></p-columnFilter></th>
+                    <th pSortableColumn="pedido"># de Pedido<p-sortIcon field="pedido"></p-sortIcon> <p-columnFilter type="text" field="pedido" display="menu" class="ml-auto"></p-columnFilter></th>
+                    <th pSortableColumn="responsable">Responsable<p-sortIcon field="responsable"></p-sortIcon> <p-columnFilter type="text" field="responsable" display="menu" class="ml-auto"></p-columnFilter></th>
+                    <th pSortableColumn="nombre_Vendedor">Asesor<p-sortIcon field="nombre_Vendedor"></p-sortIcon> <p-columnFilter type="text" field="nombre_Vendedor" display="menu" class="ml-auto"></p-columnFilter></th>
+                    <th pSortableColumn="nombreCiudad">Ciudad<p-sortIcon field="nombreCiudad"></p-sortIcon> <p-columnFilter type="text" field="nombreCiudad" display="menu" class="ml-auto"></p-columnFilter></th>
+                    <th pSortableColumn="totalLinea">Total Monetario<p-sortIcon field="totalLinea"></p-sortIcon> <p-columnFilter type="text" field="totalLinea" display="menu" class="ml-auto"></p-columnFilter></th>
+                    <th pSortableColumn="cantidadLineas">Cantidad Lineas <p-sortIcon field="cantidadLineas"></p-sortIcon> <p-columnFilter type="text" field="cantidadLineas" display="menu" class="ml-auto"></p-columnFilter></th>
+                    <th pSortableColumn="tiempoPreparacion">Tiempo de Preparación Estimado<p-sortIcon field="tiempoPreparacion"></p-sortIcon> <p-columnFilter type="text" field="tiempoPreparacion" display="menu" class="ml-auto"></p-columnFilter></th>
+                    <th pSortableColumn="tiempoTardado">Tiempo tardado en armar el pedido<p-sortIcon field="tiempoTardado"></p-sortIcon> <p-columnFilter type="text" field="tiempoTardado" display="menu" class="ml-auto"></p-columnFilter></th>
+                    <th pSortableColumn="eficiencia">Eficiencia<p-sortIcon field="eficiencia"></p-sortIcon> <p-columnFilter type="text" field="eficiencia" display="menu" class="ml-auto"></p-columnFilter></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="caption">
+              <h4 class="mt-2">{{title}}</h4>
+              <div class="flex flex-wrap gap-2 justify-content-between">
+
+                <div class="flex flex-wrap gap-2 align-items-center">
+                  <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                           placeholder="Buscar una palabra"/>
+                  </span>
+                </div>
+              </div>
+            </ng-template>
+            <ng-template pTemplate="body" let-pedidoFacturado>
+              <tr>
+                <td style="width: 14.28%; min-width: 7rem;">{{pedidoFacturado.id }}</td>
+                <td style="width: 14.28%; min-width: 7rem;">{{pedidoFacturado.fecha | date: 'dd/MM/yyyy' }}</td>
+                <td style="width: 14.28%; min-width: 7rem;">{{pedidoFacturado.pedido }}</td>
+                <td style="width: 14.28%; min-width: 7rem;">{{pedidoFacturado.responsable}}</td>
+                <td style="width: 14.28%; min-width: 7rem;">{{pedidoFacturado.nombre_Vendedor}}</td>
+                <td style="width: 14.28%; min-width: 2rem;">{{pedidoFacturado.nombreCiudad}}</td>
+                <td style="width: 14.28%; min-width: 2rem;">{{pedidoFacturado.totalLinea | currency:'L. ':'symbol':'1.2-2'}}</td>
+                <td style="width: 14.28%; min-width: 2rem;">{{pedidoFacturado.cantidadLineas}}</td>
+                <td style="width: 14.28%; min-width: 7rem;">{{ pedidoFacturado.tiempoPreparacion }} min.</td>
+                <td style="width: 14.28%; min-width: 7rem;">{{ pedidoFacturado.tiempoTardado }} min.</td>
+                <td style="width: 14.28%; min-width: 7rem;">{{ pedidoFacturado.eficiencia | percent:'1.0-2' }}</td>
+
+
+              </tr>
+            </ng-template>
+          </p-table>
+
+        </ng-template>
+      </div>
+    </div>
+  </div>

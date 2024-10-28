@@ -1,0 +1,74 @@
+
+<p-dialog header="{{ isAdd ? 'Agregar' : 'Editar' }} Usuario" [(visible)]="display" modal="true" blockScroll="true" [style]="{width: '50vw'}">
+    <ng-template [ngIf]="loading" [ngIfElse]="data">
+        Cargando...
+    </ng-template>
+    <ng-template #data>
+        <form *ngIf="formSams" [formGroup]="formSams"  class="mb-5">
+            <div class="grid p-fluid">
+                <div class="col-12 md:col-6">
+                    <span class="mt-4 p-float-label p-input-icon-left">
+
+                        <i class="pi pi-user"></i>
+                        <input id="id" type="number" pInputText formControlName="id" [ngClass]="{ 'is-invalid': submitted && f.id.errors }" disabled>
+                        <label for="id">ID</label>
+                    </span>
+                    <div *ngIf="formSams.controls['id'].invalid && formSams.controls['id'].dirty">
+                        <small *ngIf="formSams.controls['id'].errors.required" id="id" class="p-error block">ID es requerido</small>
+                    </div>
+                </div>
+                <div class="col-12 md:col-6">
+                    <span class="mt-4 p-float-label p-input-icon-left">
+                        <i class="pi pi-user"></i>
+                        <input id="clientName" type="text" pInputText formControlName="clientName" [ngClass]="{ 'is-invalid': submitted && f.clientName.errors }">
+                        <label for="clientName">Cliente</label>
+                    </span>
+                    <div *ngIf="formSams.controls['clientName'].invalid && formSams.controls['clientName'].dirty">
+                        <small *ngIf="formSams.controls['clientName'].errors.required" id="clientName" class="p-error block">Cliente es requerido</small>
+                    </div>
+                </div>
+                <div class="col-12 md:col-6">
+                    <span class="mt-4 p-float-label p-input-icon-left">
+                        <i class="pi pi-user"></i>
+                        <input id="meditionType" type="meditionType" pInputText formControlName="meditionType" [ngClass]="{ 'is-invalid': submitted && f.meditionType.errors }">
+                        <label for="meditionType">Tipo de Medición</label>
+                    </span>
+                    <div *ngIf="formSams.controls['meditionType'].invalid && formSams.controls['meditionType'].dirty">
+                        <small *ngIf="formSams.controls['meditionType'].errors.required" id="meditionType" class="p-error block">Tipo de medición es requerida</small>
+                    </div>
+                </div>
+                <div class="col-12 md:col-6">
+                    <span class="mt-4 p-float-label p-input-icon-left">
+                        <i class="pi pi-user"></i>
+                        <input id="meditionUnity" type="meditionUnity" pInputText formControlName="meditionUnity" [ngClass]="{ 'is-invalid': submitted && f.meditionUnity.errors }">
+                        <label for="meditionUnity">Unidad de Medida</label>
+                    </span>
+                    <div *ngIf="formSams.controls['meditionUnity'].invalid && formSams.controls['meditionUnity'].dirty">
+                        <small *ngIf="formSams.controls['meditionUnity'].errors.required" id="meditionUnity" class="p-error block">Unidad de medida es requerido</small>
+                    </div>
+                </div>
+                <div class="col-12 md:col-6">
+                    <span class="mt-4 p-float-label p-input-icon-left">
+                        <i class="pi pi-user"></i>
+                        <input id="samValue" type="text" pInputText formControlName="samValue" [ngClass]="{ 'is-invalid': submitted && f.samValue.errors }">
+                        <label for="samValue">Valor de Sams</label>
+                    </span>
+                    <div *ngIf="formSams.controls['samValue'].invalid && formSams.controls['samValue'].dirty">
+                        <small *ngIf="formSams.controls['samValue'].errors.required" id="samValue" class="p-error block">Valor de Sams</small>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+        <br><br><br><br>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <ng-template [ngIf]="isAdd" [ngIfElse]="addButton">
+            <button pButton type="button" [disabled]="formSams.invalid || loading" (click)="addSams()" label="Agregar" class="ml-2 p-button-raised p-button-danger"></button>
+        </ng-template>
+        <ng-template #addButton>
+            <button pButton type="button" [disabled]="formSams.invalid || loading" (click)="editSams()" label="Editar"></button>
+        </ng-template>
+    </ng-template>
+</p-dialog>

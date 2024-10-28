@@ -1,0 +1,74 @@
+
+<p-dialog header="{{ isAdd ? 'Agregar' : 'Editar' }} Usuario" [(visible)]="display" modal="true" blockScroll="true" [style]="{width: '50vw'}">
+    <ng-template [ngIf]="loading" [ngIfElse]="data">
+        Cargando...
+    </ng-template>
+    <ng-template #data>
+        <form *ngIf="formPickers" [formGroup]="formPickers"  class="mb-5">
+            <div class="grid p-fluid">
+                <div class="col-12 md:col-6">
+                    <span class="mt-4 p-float-label p-input-icon-left">
+
+                        <i class="pi pi-user"></i>
+                        <input id="id" type="number" pInputText formControlName="id" [ngClass]="{ 'is-invalid': submitted && f.id.errors }" disabled>
+                        <label for="id">ID</label>
+                    </span>
+                    <div *ngIf="formPickers.controls['id'].invalid && formPickers.controls['id'].dirty">
+                        <small *ngIf="formPickers.controls['id'].errors.required" id="id" class="p-error block">ID es requerido</small>
+                    </div>
+                </div>
+                <div class="col-12 md:col-6">
+                    <span class="mt-4 p-float-label p-input-icon-left">
+                        <i class="pi pi-user"></i>
+                        <input id="name" type="text" pInputText formControlName="name" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+                        <label for="name">Cliente</label>
+                    </span>
+                    <div *ngIf="formPickers.controls['name'].invalid && formPickers.controls['name'].dirty">
+                        <small *ngIf="formPickers.controls['name'].errors.required" id="name" class="p-error block">Nombre es requerido</small>
+                    </div>
+                </div>
+                <div class="col-12 md:col-6">
+                    <span class="mt-4 p-float-label p-input-icon-left">
+                        <i class="pi pi-user"></i>
+                        <input id="availableMinutes" type="availableMinutes" pInputText formControlName="availableMinutes" [ngClass]="{ 'is-invalid': submitted && f.availableMinutes.errors } ">
+                        <label for="availableMinutes">Minutos Disponibles</label>
+                    </span>
+                    <div *ngIf="formPickers.controls['availableMinutes'].invalid && formPickers.controls['availableMinutes'].dirty">
+                        <small *ngIf="formPickers.controls['availableMinutes'].errors.required" id="availableMinutes" class="p-error block">Minutos Disponibles</small>
+                    </div>
+                </div>
+                <div class="col-12 md:col-6">
+                    <span class="mt-4 p-float-label p-input-icon-left">
+                        <i class="pi pi-user"></i>
+                        <input id="usedMinutes" type="usedMinutes" pInputText formControlName="usedMinutes" [ngClass]="{ 'is-invalid': submitted && f.usedMinutes.errors }" disbled>
+                        <label for="usedMinutes">Minutos de Trabajo</label>
+                    </span>
+                    <div *ngIf="formPickers.controls['usedMinutes'].invalid && formPickers.controls['usedMinutes'].dirty">
+                        <small *ngIf="formPickers.controls['usedMinutes'].errors.required" id="usedMinutes" class="p-error block">Minutos de Trabajo</small>
+                    </div>
+                </div>
+                <div class="col-12 md:col-6">
+                    <span class="mt-4 p-float-label p-input-icon-left">
+                        <i class="pi pi-user"></i>
+                        <input id="remainingMinutes" type="text" pInputText formControlName="remainingMinutes" [ngClass]="{ 'is-invalid': submitted && f.remainingMinutes.errors }">
+                        <label for="remainingMinutes">Minutos Restantes</label>
+                    </span>
+                    <div *ngIf="formPickers.controls['remainingMinutes'].invalid && formPickers.controls['remainingMinutes'].dirty">
+                        <small *ngIf="formPickers.controls['remainingMinutes'].errors.required" id="remainingMinutes" class="p-error block">Valor de Sams</small>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+        <br><br><br><br>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <ng-template [ngIf]="isAdd" [ngIfElse]="addButton">
+            <button pButton type="button" [disabled]="formPickers.invalid || loading" (click)="editPickers()" label="Agregar" class="ml-2 p-button-raised p-button-danger"></button>
+        </ng-template>
+        <ng-template #addButton>
+            <button pButton type="button" [disabled]="formPickers.invalid || loading" (click)="editPickers()" label="Editar"></button>
+        </ng-template>
+    </ng-template>
+</p-dialog>

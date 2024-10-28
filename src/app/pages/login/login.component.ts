@@ -25,6 +25,16 @@ import { Router } from '@angular/router';
       margin-right: 1rem;
       color: var(--primary-color) !important;
     }
+    :host ::ng-deep button.p-button {
+  background-color: #C12D37 !important; /* Color rojo directo */
+  border-color: #C12D37 !important; /* Color rojo directo */
+  color: #FFFFFF !important; /* Color del texto en el botón */
+}
+
+:host ::ng-deep button.p-button:hover {
+  background-color: darken(#FF0000, 10%) !important; /* Color rojo oscurecido al 10% */
+  border-color: darken(#FF0000, 10%) !important; /* Color rojo oscurecido al 10% */
+}
   `]
 })
 export class LoginComponent implements OnInit, OnDestroy {

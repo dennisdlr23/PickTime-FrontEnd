@@ -11,6 +11,13 @@
 @import "assets/sass/overrides/_overrides";
 
 
+:root {
+    --primary-color: #FF0000; /* Reemplaza con el código de color rojo correcto */
+    --primary-color-text: #FFFFFF; /* Si necesitas un color de texto específico para contrastar con el rojo */
+
+    /* Contraste con el gris */
+
+}
 body.swal2-toast-shown .swal2-container.swal2-top-end, body.swal2-toast-shown .swal2-container.swal2-top-right{
     z-index: 4201 !important;
 }

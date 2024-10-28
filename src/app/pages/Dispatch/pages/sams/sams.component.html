@@ -1,0 +1,54 @@
+<div class="grid">
+	<div class="col-12 xl:col-12">
+		<div class="card">
+			<ng-template [ngIf]="loading" [ngIfElse]="showTable">
+				<skeleton-table-component [title]="title"></skeleton-table-component>
+			</ng-template>
+
+			<ng-template #showTable>
+				<p-table #dt [value]="samsModel" [paginator]="true" [rows]="6"
+					responsiveLayout="scroll" styleClass="p-datatable-sm p-datatable-gridlines" [globalFilterFields]="['id','clientName','meditionType', 'meditionUnity', 'samValue']">
+					<ng-template pTemplate="header">
+						<tr>
+							<th pSortableColumn="id">Id <p-sortIcon field="id"></p-sortIcon> <p-columnFilter type="text" field="id" display="menu" class="ml-auto"></p-columnFilter></th>
+							<th pSortableColumn="clientName">Cliente <p-sortIcon field="clientName"></p-sortIcon> <p-columnFilter type="text" field="clientName" display="menu" class="ml-auto"></p-columnFilter></th>
+                            <th pSortableColumn="meditionType">Tipo de medida <p-sortIcon field="meditionType"></p-sortIcon> <p-columnFilter type="text" field="meditionType" display="menu" class="ml-auto"></p-columnFilter></th>
+                            <th pSortableColumn="meditionUnity">Unidad de Medida <p-sortIcon field="meditionUnity"></p-sortIcon> <p-columnFilter type="text" field="meditionUnity" display="menu" class="ml-auto"></p-columnFilter></th>
+                            <th pSortableColumn="samValue">Valor de SAM<p-sortIcon field="samValue"></p-sortIcon> <p-columnFilter type="text" field="samValue" display="menu" class="ml-auto"></p-columnFilter></th>
+							<th>Acción</th>
+						</tr>
+					</ng-template>
+					<ng-template pTemplate="caption">
+                        <h4 class="mt-2">{{title}}</h4>
+						<div class="flex flex-wrap gap-2 justify-content-between">
+							<div class="flex flex-wrap gap-2">
+								<button pButton class="ml-2 p-button-raised p-button-danger" pRipple type="button" (click)="addSams()" pTooltip="Agregar nuevo Equipo" tooltipPosition="bottom" label="Agregar"></button>
+							</div>
+							<div class="flex flex-wrap gap-2 align-items-center">
+								<span class="p-input-icon-left">
+									<i class="pi pi-search"></i>
+									<input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Buscar una palabra" />
+								</span>
+							</div>
+						</div>
+					</ng-template>
+					<ng-template pTemplate="body" let-sams>
+						<tr>
+							<td style="width: 5%; min-width: 2rem;">{{sams.id}}</td>
+							<td style="width: 20%; min-width: 7rem;">{{sams.clientName}}</td>
+                            <td style="width: 15%; min-width: 7rem;">{{sams.meditionType}}</td>
+							<td style="width: 15%; min-width: 7rem;">{{sams.meditionUnity}}</td>
+                            <td style="width: 10%; min-width: 2rem;">{{sams.samValue}}</td>
+
+
+							<td style="width: 20%;">
+								<button (click)="editSams(sams)" pButton pRipple type="button" icon="pi pi-pencil" class="p-button-rounded p-button-danger p-button-outlined"></button>
+							</td>
+						</tr>
+					</ng-template>
+				</p-table>
+                <app-sams-dialog (samsModify)="samsModify($event)"></app-sams-dialog>
+			</ng-template>
+		</div>
+	</div>
+</div>

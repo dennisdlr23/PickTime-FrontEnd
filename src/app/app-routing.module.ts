@@ -45,7 +45,14 @@ import { ListPermissionComponent } from './pages/permissions/list.permission.com
                                     './pages/permissions/permissions.module'
                                 ).then((m) => m.PermissionsModule),
                             canActivate: [AuthGuard],
-                        }
+                        },
+                        {
+                            path: 'tiempos',
+                            loadChildren: () =>
+                                import('./pages/Dispatch/dispatch.module').then(
+                                    (m) => m.DispatchModule
+                                ),
+                        },
                     ],
                 },
                 {
@@ -55,6 +62,7 @@ import { ListPermissionComponent } from './pages/permissions/list.permission.com
                             (m) => m.LoginModule
                         ),
                 },
+
                 { path: 'pages/error', component: ErrorComponent },
                 { path: 'pages/notfound', component: NotfoundComponent },
                 { path: '**', redirectTo: 'pages/notfound' },
